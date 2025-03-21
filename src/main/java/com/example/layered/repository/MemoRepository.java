@@ -6,15 +6,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemoRepository {
 
-    Memo saveMemo(Memo memo);
+    MemoResponseDto saveMemo(Memo memo);
 
     List<MemoResponseDto> findAllMemos();
 
-    Memo findMemoById(Long id);
+    Memo findMemoByIDOrElseThrow(Long id);
 
-    void deleteMemo(Long id);
+    Optional<Memo> findMemoById(Long id);
+
+    int updateMemo(Long id, String title, String contents);
+
+    int updateTitle(Long id, String title);
+
+    int deleteMemo(Long id);
 
 }
